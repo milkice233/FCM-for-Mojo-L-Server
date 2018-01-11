@@ -3,20 +3,24 @@
 use Getopt::Long;
 use Mojo::Webqq;
 use lib './perl';
+use Digest::MD5;
 
 my $node_port   = 5004;
 my $openqq_port = 5003;
+my $passwd;
 
 GetOptions(
     "node-port=i"   => \$node_port,
     "openqq-port=i" => \$openqq_port,
+    "passwd=s"      => \$passwd,
 ) or die("Error in command line arguments\n");
 
 my $client = Mojo::Webqq->new(
     log_encoding           => 'utf8',
     poll_failure_count_max => 20,
     account                => 'ffm',
-    qrcode_path            => '/tmp/mojo_webqq_qrcode_ffm.png'
+    qrcode_path            => '/tmp/mojo_webqq_qrcode_ffm.png',
+    pwd => defined $passwd ? Digest::MD5::md5_hex($passwd) : undef
 );
 
 $client->load('ShowMsg');

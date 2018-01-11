@@ -1,6 +1,6 @@
-var fs = require('fs');
+const fs = require('fs');
 
-var config = {
+const config = {
     "mojo": {
         "webqq": {
             // openqq plugin local port
@@ -30,6 +30,6 @@ var config = {
         "key": fs.readFileSync(""),
         "cert": fs.readFileSync("")
     }*/
-}
+};
 
 module.exports = config;
